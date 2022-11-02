@@ -1,0 +1,17 @@
+11/01/2022 Tuesday 
+
+Serverless 
+
+1. What is serverless? AWS handles, controls servers for us. 
+2. Main benefit of serverless/AWS Lambda? You don't have to worry about configuring runtime environments 
+and all you need to do is just simply select the runtime environments
+
+Scenario: Per company's requirement vpc flowlogs must always enabled. For example make sure during 
+vpc flowlog deletion your automations script must recreate it. What will be your solution?
+Event driven solution with AWS Lambda.
+
+1. aws iam create-role --role-name VPCFlowLogsRole --assume-role-policy-document file://trust-policy.json
+2. aws iam put-role-policy --role-name VPCFlowLogsRole --policy-name VPCFlowLogsPolicy --policy-document file://vpc-flow-logs-iam-role.json
+3. Create Lambda execution policy --> lambda_execution_policy.json --> AWS IAM console
+4. Create IAM role and attach lambda_execution_policy.json to the role 
+5. AWS Lambda console give Lambda function name, select Python 3.7 runtime and attach role to lambda function 
