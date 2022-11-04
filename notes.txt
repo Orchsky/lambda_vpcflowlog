@@ -15,3 +15,20 @@ Event driven solution with AWS Lambda.
 3. Create Lambda execution policy --> lambda_execution_policy.json --> AWS IAM console
 4. Create IAM role and attach lambda_execution_policy.json to the role 
 5. AWS Lambda console give Lambda function name, select Python 3.7 runtime and attach role to lambda function 
+
+aws lambda add-permission \
+--function-name enable-vpc-flowlog \
+--statement-id lambda-event \
+--action 'lambda:InvokeFunction' \
+--principal events.amazonaws.com \
+--source-arn arn:aws:events:us-east-2: 062315287263:rule/vpc-flow-logs
+
+aws lambda add-permission --function-name arn:aws:lambda:us-east-2:062315287263:function:enable-vpc-flowlog --statement-id trigger-lambda-from-eventbridge --action 'lambda:InvokeFunction' --principal events.amazonaws.com --source-arn arn:aws:events:us-east-2:062315287263:rule/vpc-flow-logs
+
+11/03/2022 Thursday 
+
+1. What is Shift Left? Secuirty is first priority 
+2. CloudTrail --> Used for auditing. It captures all API (Application Programming Interface) logs 
+3. What is BOTO3 --> AWS SDK (Software Development Kit) for Python 
+4. What triggers Lambda function in Event Driven Solution --> AWS EventBridge service 
+5. EventBridge has 2 rule types --> 1) Rule with an event pattern and 2) Schedule (Cron Job)
