@@ -66,3 +66,34 @@ Do you make sure you only keep last 3 snapshots? Because data written to ec2 ins
 For example: 30 days old snapshot won't have latest changes. 
 
 Solution: Pruning of snapshots with lambda function. 
+
+
+11/06/2022 Sunday Funday 
+
+Scenario: For long term storage S3 bucket being utilized. Raw data keep dumping to S3 bucket such flat 
+json files. Json data must be persisted in Database for future utilization. From Database data it easy 
+to create Dashboard and query the data. 
+
+Bridge between S3 and DynamoDB? Answer: Lambda 
+
+Steps: 
+    1. Create DynamoDB table and call Employees, Partition key --> emp_id 
+    2. Create S3 bucket to store flat file. e.i. .json extension 
+    3. Set up lambda 
+    4. Before Lambda create an IAM role attach CloudWatch, S3 and DynamoDB policies. 
+    5. S3 --> Properties --> Event Notifications --> All object create events --> Destination --> Lambda 
+
+Scenario: How do you make sure Database credentials like username, password and db endpoint is not 
+plain text and stored in Vault.
+What is Vault?  is for secrets storage. It procides encryption at rest for all secrets. 
+Manage Secrets & Protect Sensitive Data
+
+How do you rotate DB secrets? 
+
+For this I use AWS Secrets Manager. Created RDS credentials in Secrets Manager. Used python with mysql.connector
+module, AWS SDK for Python boto3 and json module to parse the secret values from Secrets Manager. 
+AWS Secrets Manager has native, out of box integration with AWS RDS. 
+
+Install mysql connector  and boto3 
+1. pip3 install mysql-connector-python  (link: https://pynative.com/install-mysql-connector-python/)
+2. pip3 install boto3
